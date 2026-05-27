@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3_내장함수</title>
+</head>
+<body>
+    <h3>3.내장함수</h3>
+
+    <script>
+
+        // 숫자 변환
+        let str1 = '10';
+        let str2 = '3.1415';
+        let str3 = '2026년';
+
+        let rs1 = parseInt(str1); // 정수 변환
+        let rs2 = parseInt(str2);
+        let rs3 = parseInt(str3);
+        let rs4 = parseFloat(str3); // 실수 변환
+
+        let rs5 = Number(str1);
+        let rs6 = Number(str2);
+        let rs7 = Number(str3); // NaN : 
+
+        document.write('rs1 : ' + rs1 + ', typeof ' + typeof rs1 + '<br>');
+        document.write('rs2 : ' + rs2 + ', typeof ' + typeof rs2 + '<br>');
+        document.write('rs3 : ' + rs3 + ', typeof ' + typeof rs3 + '<br>');
+        document.write('rs4 : ' + rs4 + ', typeof ' + typeof rs4 + '<br>');
+        document.write('rs5 : ' + rs5 + ', typeof ' + typeof rs5 + '<br>');
+        document.write('rs6 : ' + rs6 + ', typeof ' + typeof rs6 + '<br>');
+        document.write('rs7 : ' + rs7 + ', typeof ' + typeof rs7 + '<br>');
+
+        // 문자열 변환
+        let num1 = 10;
+        let num2 = 20;
+
+        let res1 = String(num1);
+        let res2 = String(num2);
+        document.write('res1 : ' + res1 + ', typeof ' + typeof res1 + '<br>');
+        document.write('res2 : ' + res2 + ', typeof ' + typeof res2 + '<br>');
+
+        // 대화상자
+        alert('기본 대화상자 입니다.');
+
+        const result = confirm('정말 삭제하시겠습니까?');
+
+        if (result) {
+            document.write('확인을 누르셨습니다.');
+        }else{
+            document.write('취소를 누르셨습니다.');
+        }
+
+        const value = prompt('숫자 입력하세요.');
+        document.write('입력한 숫자 : ' + value + '<br>');
+        
+        // 타이머 함수
+        setTimeout(function(){
+
+            alert('setTimeout 실행!!!')
+        
+        }, 1000 * 5); // 3초 후에 콜백함수 실행
+
+        setInterval(function(){
+            console.log('setInterval 실행!!!')
+        }, 1000 * 3); // 3초마다 실행
+
+
+    </script>
+</body>
+</html>

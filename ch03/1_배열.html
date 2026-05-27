@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1_배열</title>
+</head>
+<body>
+    <h3>1.배열</h3>
+    
+    <script>
+        // 배열 생성
+        const arr = [1, 2, 3, 4, 5];
+
+        // 출력
+        document.write('1번째 원소 : ' + arr[0] + '</br>');
+        document.write('2번째 원소 : ' + arr[1] + '</br>');
+
+        // 배열 길이
+        document.write('arr 길이(원소갯수) : ' + arr.length + '</br>');
+
+        for(let i = 0; i<arr.length; i++) {
+            document.write('arr[' + i + '] : ' + arr[i] + '</br>');
+        }
+
+        // 배열 인덱스 참조 반복문
+        for(let i in arr) {
+            document.write('i : ' + i + ', arr['+ i +'] : ' + arr[i] + '</br>');
+        }
+
+
+        // 배열 원소 참조 반복문
+        for(let e of arr) {
+            document.write('e : ' + e + '</br>');
+        }
+
+        // 2차원 배열
+        const arr2d = [[1, 2, 3], 
+                       [4, 5, 6], 
+                       [7, 8, 9]];
+
+        document.write(arr2d[0][0] + '</br>');
+        document.write(arr2d[1][1] + '</br>');
+        document.write(arr2d[2][2] + '</br>');
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2_함수</title>
+
+    <!-- 외부 js 파일 추가 -->
+    <script src="./js/calc.js"></script>
+</head>
+<body>
+    <h3>2.함수</h3>
+
+    <script>
+        // 선언함수
+        function f(x){
+            let y = 2 * x + 3;
+            return y;
+        }
+
+        let y1 = f(1); // 함수 호출
+        let y2 = f(2);
+        let y3 = f(3);
+
+        document.write('y1 : ' + y1 + '<br>');
+        document.write('y2 : ' + y2 + '<br>');
+        document.write('y3 : ' + y3 + '<br>');
+
+
+        // 익명함수
+        const sum = function (x, y){
+            let z = x + y;
+            return z;
+        };
+
+        let r1 = sum(1, 2);
+        let r2 = sum(2, 3);
+
+        document.write('r1 : ' + r1 + '<br>');
+        document.write('r2 : ' + r2 + '<br>');
+
+        // 화살표함수
+        const minus = (x, y) => {
+            return x - y;
+        };
+
+        const multi = (x, y) => x * y;
+
+        let res1 = minus(1, 2);
+        let res2 = multi(2, 3);
+
+        document.write('res1 : ' + res1 + '<br>');
+        document.write('res2 : ' + res2 + '<br>');
+
+        // 고차함수 : 함수를 반환하거나 매개변수로 전달받는 함수
+        function calculator(x, y, operator){
+            return operator(x, y); // 함수 호출 리턴
+        }
+
+        let result = calculator(1, 2, function(x, y){ // 콜백함수 : 인자로 전달되는 함수
+            return x + y;
+        });
+
+        document.write('result : ' + result + '<br>');
+
+
+        // 클로저 - 함수 자신이 호출될때 외부 변수를 기억하는 매커니즘
+        function outer(){
+
+            let count = 0; // 지역변수
+
+            return function(){
+                count++; // 외부 변수 count 값을 기억하는 클로저 
+                return count;
+            }
+        }
+
+        const counter = outer();
+
+        let var1 = counter();
+        let var2 = counter();
+        let var3 = counter();
+
+        document.write('var1 : ' + var1 + '<br>');
+        document.write('var2 : ' + var2 + '<br>');
+        document.write('var3 : ' + var3 + '<br>');
+
+        // 라이브러리 함수(외부 script 파일 추가)
+        let rs1 = plus(1, 2);        
+        let rs2 = div(4, 2);
+
+        document.write('rs1 : ' + rs1 + '<br>');
+        document.write('rs2 : ' + rs2 + '<br>');
+    </script>
+</body>
+</html>

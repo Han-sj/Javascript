@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3_문서객체모델</title>
+</head>
+<body>
+    <h3>3.문서객체모델(DOM)</h3>
+
+    <h4>문서객체 선택</h4>
+    <ul>
+        <li id="seoul">
+            <span>서울</span>
+            <ol>
+                <li><i>명동</i></li>
+                <li><i>종로</i></li>
+                <li><i>신촌</i></li>
+                <li><i>용산</i></li>
+            </ol>
+        </li>
+        <li>대전</li>
+        <li id="daegu">대구</li>
+        <li>
+            <span>부산</span>
+            <ol>
+                <li class="busan">서면</li>
+                <li class="busan">해운대</li>
+                <li class="busan">광안리</li>
+            </ol>
+        </li>
+        <li class="gwangju">광주</li>
+    </ul>
+
+    <script>
+        //-------------------------------
+        // 문서객체 선택
+        //-------------------------------
+        const h3 = document.querySelector('h3');
+        h3.style.color = 'red';
+
+        const seoul = document.querySelector('#seoul > span');
+        seoul.style.color = 'blue'; 
+
+        const daejeon = document.querySelector('ul > li:nth-child(2)');
+        daejeon.style.color = 'green';
+
+        const busan = document.querySelector('ul > li:nth-child(4) > span');
+        busan.style.color = 'blue';
+
+        const busans = document.querySelectorAll('.busan'); // 하나 이상 문서객체 선택
+        busans[0].style.color = 'red';
+        busans[1].style.color = 'green';
+        busans[2].style.color = 'blue';
+
+        const daegu = document.getElementById('daegu'); // 아이디값으로 선택
+        daegu.style.color = 'brown';
+
+        const itags = document.getElementsByTagName('i');
+
+        for(const i of itags){
+            i.style.color = 'orange';
+        }
+        
+        const gwangju = document.getElementsByClassName('gwangju'); // 클래스값으로 선택
+        gwangju[0].style.color = 'green';
+
+    </script>
+    <hr>
+
+    <h4>문서객체 조작</h4>
+
+    <img src="" alt="">
+    <img src="" alt="">
+
+    <div class="box1">box1</div>
+    <div class="box2">box2</div>
+
+    <ul id="korea">
+        <li>서울</li>
+        <li>대전</li>
+        <li>대구</li>
+        <li>부산</li>
+        <li>광주</li>
+    </ul>
+
+    <p class="content"></p>
+    <p class="content"></p>
+
+    <div class="box">box1</div>
+    <div class="box green">box2</div>
+    <div class="box">box3</div>
+
+
+    <script>
+        //-------------------------------
+        // 문서객체 조작
+        //-------------------------------
+
+        // 속성 조작
+        const images = document.getElementsByTagName('img');
+        images[0].src = './images/flower1.jpg';
+        images[0].alt = '벗꽃';
+
+        images[1].src = './images/flower2.jpg';
+        images[1].alt = '코스모스';
+
+        // 스타일 조작
+        const box1 = document.querySelector('.box1');        
+        box1.style.width = '100px';
+        box1.style.height = '100px';
+        box1.style.border = '1px solid black';
+        box1.style.background = 'orange';
+    
+        const box2 = document.getElementsByClassName('box2');
+        box2[0].style.width = '100px';
+        box2[0].style.height = '100px';
+        box2[0].style.border = '1px solid black';
+        box2[0].style.background = 'green';
+
+        // 태그 내용 조작
+        const korea = document.querySelector('#korea');
+
+        const text = korea.innerText; // 태그 내용의 텍스트 요소만 가져오기
+        const html = korea.innerHTML; // 태그 내용의 태그 요소 가져오기
+
+        console.log(text);
+        console.log(html);
+
+        const contents = document.querySelectorAll('.content');
+        
+        contents[0].innerText = '<em>TEXT 내용입니다.</em>';
+        contents[1].innerHTML = '<em>HTML 내용입니다.</em>';
+
+        // 클래스 속성 조작
+        const boxs = document.getElementsByClassName('box');
+        boxs[0].classList.add('red');
+        boxs[1].classList.remove('green');
+        boxs[2].classList.toggle('blue'); // add 또는 remove
+    </script>
+    <style>
+        .box {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;            
+        }
+
+        .red   { background-color: red; }
+        .blue  { background-color: blue; }
+        .green { background-color: green; }
+    </style>
+
+    <hr>
+    <h4>문서객체 추가/이동</h4>
+    
+    <ul class="city">
+        <li>
+            <em>경기도</em>
+            <ol></ol>
+        </li>
+        <li>
+            <em>충청도</em>
+            <ol></ol>
+        </li>
+        <li>
+            <em>강원도</em>
+            <ol></ol>
+        </li>
+        <li>
+            <em>경상도</em>
+            <ol>
+                <li>창원</li>
+                <li>수원</li>
+                <li>목포</li>
+                <li>부여</li>
+                <li>원주</li>
+                <li>파주</li>
+            </ol>
+        </li>
+        <li>
+            <em>전라도</em>
+            <ol></ol>
+        </li>
+    </ul>
+
+    <script>
+        //-------------------------------
+        // 문서객체 추가/이동
+        //-------------------------------
+        const ggd = document.querySelector('.city > li:nth-child(1) > ol');
+        const ccd = document.querySelector('.city > li:nth-child(2) > ol');
+        const gwd = document.querySelector('.city > li:nth-child(3) > ol');
+        const gsd = document.querySelector('.city > li:nth-child(4) > ol');
+        const jrd = document.querySelector('.city > li:nth-child(5) > ol');
+
+
+        ggd.insertAdjacentHTML('beforeend', '<li>평택</li>');   // 문서객체 위쪽에서 삽입
+        ggd.insertAdjacentHTML('beforeend', '<li>용인</li>');
+        ggd.insertAdjacentHTML('afterbegin', '<li>성남</li>');  // 문서객체 아래쪽에서 삽입
+        ggd.insertAdjacentHTML('afterbegin', '<li>화성</li>');
+
+
+        // 문서객체 하위 요소 선택
+        const lis = gsd.getElementsByTagName('li');
+        const suwon = lis[1];
+        const mokpo = lis[2];
+        const buyeo = lis[3];
+        const wonju = lis[4];
+        const pajoo = lis[5];
+
+        // 문서객체 이동
+        ggd.append(suwon);
+        ggd.prepend(pajoo);
+
+        jrd.append(mokpo);
+        ccd.prepend(buyeo);
+        gwd.append(wonju);
+    </script>
+
+    <hr>
+    <h4>문서객체 생성/삭제</h4>
+
+    <section>
+        <p>삭제 예정 입니다.</p>
+    </section>
+
+    <script>
+        //-------------------------------
+        // 문서객체 생성/삭제
+        //-------------------------------
+
+
+        // 문서객체 생성
+        const newImg = document.createElement('img');
+        newImg.src = './images/flower1.jpg';
+        newImg.alt = '벗꽃';
+
+        const section = document.getElementsByTagName('section')[0];
+        section.append(newImg);
+
+        // 문서객체 삭제
+        const p = section.getElementsByTagName('p')[0];
+        p.remove();
+
+    </script>
+
+    <hr>
+</body>
+</html>

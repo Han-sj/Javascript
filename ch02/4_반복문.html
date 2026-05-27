@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4_반복문</title>
+</head>
+<body>
+    <h3>4.반복문</h3>
+
+    <h4>for</h4>
+    <script>
+        for(let i = 0; i < 5; i++) {
+            document.write('<p>i : ' + i + '</p>');
+        }
+
+        // 1부터 10까지 합
+        let sum = 0;
+        for(let k = 1; k <= 10; k++) {
+            sum += k;
+        }
+
+        document.write('<p>1부터 10까지 합 : ' + sum + '</p>');
+
+        // 별삼각형
+        for(let x = 1; x <= 9; x++) {
+            for(let y = 1; y <= x; y++) {
+                document.write('⭐');
+            }
+            document.write('<br>');
+        }
+
+
+    </script>
+    
+    <h4>while</h4>
+    <script>
+        // while 기본
+        let i = 0;
+
+        while(i <= 3) {
+            document.write('i : ' + i + '<br>');
+            i++;
+        }
+
+        // do-while
+        let total =0;
+        let k = 1;
+
+        do {
+
+            total += k;
+            k++;
+
+        }while(k <= 10);
+
+        document.write('1부터 10까지 합 : ' + total + '<br>');
+            
+        </script>
+
+    <h4>구구단</h4>
+    <table border="1">
+        <tr>
+            <th>2단</th>
+            <th>3단</th>
+            <th>4단</th>
+            <th>5단</th>
+            <th>6단</th>
+            <th>7단</th>
+            <th>8단</th>
+            <th>9단</th>
+        </tr>
+        <script>
+            for(let x = 1 ; x <= 9 ; x++) {
+                document.write('<tr>');
+                    for(let y = 2; y <= 9; y++){
+                        let z = x * y;
+
+                        document.write('<td>' + y + ' x ' + x + ' = ' + z + '</td>')
+                    }
+                    document.write('</tr>')
+            }
+        </script>
+    </table>
+
+</body>
+</html>
