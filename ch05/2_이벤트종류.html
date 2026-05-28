@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2_이벤트종류</title>
+    <script>
+
+        console.log('1...');
+
+        // 문서 로드 이벤트 - 브라우저에 HTML 문서 로드가 완료된 후 실행
+        document.addEventListener('DOMContentLoaded', function(){
+            
+            console.log('3...');
+
+            const btnConfirm1 = document.getElementById('btnConfirm');
+            console.log(btnConfirm);    
+
+            btnConfirm.onclick = function(){
+                alert('확인!!!');
+            };
+        
+            // 마우스 이벤트 종류
+            const boxes = document.getElementsByClassName('box');
+
+            boxes[0].addEventListener('click', function(){
+                this.style.background = 'red';
+            });
+            boxes[1].addEventListener('mousedown', function(){
+                this.style.background = 'blue';
+            });
+            boxes[2].addEventListener('mouseup', function(){
+                this.style.background = 'green';
+            });
+            boxes[3].addEventListener('mouseover', function(){
+                this.style.background = 'orange';
+            });
+            boxes[4].addEventListener('mouseenter', function(){
+                this.style.background = 'yellow';
+            });
+            boxes[5].addEventListener('mouseout', function(){
+                this.style.background = 'silver';
+            });
+            boxes[6].addEventListener('mousemove', function(){
+                console.log('mousemove!!!');
+            });
+
+            // 키보드 이벤트
+            const userid = document.getElementsByName('userid')[0];
+            const name = document.getElementsByName('name')[0];
+            const results = document.getElementsByClassName('result');
+
+            userid.addEventListener('keydown', function(){
+
+                let value = this.value;
+                results[0].innerText = value;
+            });
+
+            name.addEventListener('keyup', function(){
+                results[1].innerText = this.value;
+            });
+
+            // 폼 이벤트
+            const formUser = document.formUser; // form 태그 name 속성값으로 문서객체
+            const inputUserid = formUser.userid;
+            const inputName = formUser.name;
+            const selectAddr = formUser.addr;
+            const prints = document.getElementsByClassName('print');
+
+            inputUserid.addEventListener('focus', function(){
+                prints[0].innerText = 'focus!';
+            });
+            
+            inputName.addEventListener('focusout', function(){
+                prints[1].innerText = 'focusout!';
+            });
+            
+            selectAddr.addEventListener('change', function(){
+                prints[2].innerText = this.value;
+            });
+            
+            formUser.addEventListener('submit', function(){
+                alert('전송시작!');
+            });
+
+            
+
+
+
+
+
+
+        });
+
+        
+        
+
+
+
+    </script>
+    <style>
+        .box {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            box-sizing: border-box;
+        }
+
+    </style>
+</head>
+<body>
+    <h3>2.이벤트 종류</h3>
+
+    <h4>문서 이벤트</h4>
+    <button id="btnConfirm">확인</button>
+    
+    
+    
+    <h4>마우스 이벤트</h4>
+    <section>
+        <div class="box box1">click</div>
+        <div class="box box2">mousedown</div>
+        <div class="box box3">mouseup</div>
+        <div class="box box4">mouseover</div>
+        <div class="box box5">mouseenter</div>
+        <div class="box box6">mouseout</div>
+        <div class="box box7">mousemove</div>
+    </section>
+    
+    
+    <h4>키보드 이벤트</h4>
+    <section>
+        <form> 
+            <p>
+                <input type="text" name="userid">
+                <span class="result"></span>
+            </p>
+            <p>
+                <input type="text" name="name">
+                <span class="result"></span>
+            </p>
+        </form>
+    </section>
+    
+    
+    
+    <h4>폼 이벤트</h4>
+    
+    <section>
+        <!-- form name 속성으로 문서객체 생성 -->
+        <form name="formUser">
+            <p>
+                <input type="text" name="userid">
+                <span class="print"></span>
+            </p>
+            <p>
+                <input type="text" name="name">
+                <span class="print"></span>
+            </p>
+            <p>
+                <select name="addr">
+                    <option>서울</option>
+                    <option>대전</option>
+                    <option>대구</option>
+                    <option>부산</option>
+                    <option>광주</option>
+                </select>
+                <span class="print"></span>
+            </p>
+            <input type="submit" value="전송">
+        </form>
+    </section>
+
+
+
+
+
+
+</body>
+</html>
+<script>
+
+        console.log('2...');
+    </script>

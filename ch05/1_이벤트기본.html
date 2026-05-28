@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1_이벤트기본</title>
+</head>
+<body>
+    <h3>1.이벤트 기본 실습</h3>
+
+    <h4>인라인 모델 이벤트 방식</h4>
+    <button onclick="btn1()">버튼1</button>
+    <button ondblclick="btn2()">버튼2</button>
+    <button onmousedown="btn3()">버튼3</button>
+    <button onmouseup="btn4()">버튼4</button>
+
+    <script>
+
+        /*
+            인라인 이벤트 모델
+            - 태그의 이벤트 속성으로 이벤트 핸들러 호출
+        */
+
+        function btn1() {
+            alert('버튼 1 클릭!');
+        }
+        function btn2() {
+            alert('버튼 2 클릭!');
+        }
+        function btn3() {
+            alert('버튼 3 클릭!');
+        }
+        function btn4() {
+            alert('버튼 4 클릭!');
+        }
+
+
+
+    </script>
+
+
+
+    <h4>기본 모델 이벤트 방식</h4>
+    
+    <button id="button1">버튼1</button>
+    <button id="button2">버튼2</button>
+    <button id="button3">버튼3</button>
+
+    <script>
+
+        /*
+            기본 이벤트 모델
+            - 문서 객체 이벤트 속성으로 이벤트 핸들러 호출
+        */
+
+        const button1 = document.getElementById('button1');
+        const button2 = document.getElementById('button2');
+        const button3 = document.getElementById('button3');
+
+        button1.onclick = function(){
+            alert('버튼1!!!');
+        };
+
+        button2.ondblclick = function(){
+            alert('버튼2!!!');
+        };
+
+        button3.onmousedown = () => alert('버튼3!!!');
+
+
+
+    </script>
+    
+    
+    
+    <h4>표준 모델 이벤트 방식</h4>
+
+    <button class="btn1">버튼1</button>
+    <button class="btn2">버튼2</button>
+    <button class="btn3">버튼3</button>
+
+    <script>
+
+        /*
+            표준 이벤트 모델
+            - 문서객체 리스너로 이벤트 호출
+        */
+
+        const bttn1 = document.getElementsByClassName('btn1')[0];
+        const bttn2 = document.getElementsByClassName('btn2')[0];
+        const bttn3 = document.getElementsByClassName('btn3')[0];
+
+        bttn1.addEventListener('click', function(){
+            alert('버튼1!!!');
+        });
+        
+        bttn2.addEventListener('dblclick', function(){
+            alert('버튼2!!!');
+        });
+        
+        bttn3.addEventListener('mousedown', function(){
+            alert('버튼3!!!');
+        });
+
+    </script>
+
+
+
+
+
+</body>
+</html>

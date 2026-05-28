@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3_이벤트객체</title>
+    <style>
+        #container {
+            width: 600px;
+            height: 300px;
+            border: 1px solid black;
+        }
+    </style>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function(){
+                
+            const container = document.getElementById('container');
+            const spans = document.getElementsByTagName('span');
+
+            container.addEventListener('mousemove', function(e){
+                spans[0].innerText = e.clientX;
+                spans[1].innerText = e.clientY;
+                spans[2].innerText = e.pageX;
+                spans[3].innerText = e.pageY;
+                spans[4].innerText = e.screenX;
+                spans[5].innerText = e.screenY;
+                spans[6].innerText = e.target;
+                spans[7].innerText = e.target.tagName;
+                spans[8].innerText = e.target.id;
+                spans[9].innerText = e.timeStamp;
+            });
+
+            const links = document.getElementsByTagName('a');
+            const form = document.getElementsByTagName('form')[0];
+
+            links[0].addEventListener('click', function(e){
+                
+                // 이벤트 대상 태그의 기본 이벤트를 취소
+                e.preventDefault();
+
+                alert('네이버 이동!!!');
+            });
+
+            links[1].addEventListener('click', function(e){
+                alert('구글 이동!!!');
+
+                e.preventDefault();
+            });
+
+            form.addEventListener('submit', function(e){
+
+    
+
+                const result = confirm('전송하시겠습니까?');
+
+                if(!result) {
+                    e.preventDefault();
+                }
+
+                alert('폼 전송!!!');
+
+            });
+
+        }); // DOMcontentLoaded 끝
+
+
+    </script>
+</head>
+<body>
+    <h3>3.이벤트 객체</h3>
+
+    <div id="container"></div>
+
+    <h4>이벤트 객체 주요 속성</h4>
+    <p>
+        clientX : <span>0</span><br>
+        clientY : <span>0</span><br>
+        pageX : <span>0</span><br>
+        pageY : <span>0</span><br>
+        screenX : <span>0</span><br>
+        screenY : <span>0</span><br>
+        target : <span>0</span><br>
+        target 태그명 : <span>0</span><br>
+        target 아이디 : <span>0</span><br>
+        timestamp : <span>0</span><br>
+
+
+    </p>
+
+    <h4>기본 이벤트 해제</h4>
+
+    <a href="https://naver.com">네이버</a>
+    <a href="https://google.com">구글</a>
+
+    <form action="https://google.com">
+        <input type="text" name="userid"><br>
+        <input type="text" name="name"><br>
+        <input type="submit" value="전송"><br>
+    </form>
+
+
+
+</body>
+</html>
