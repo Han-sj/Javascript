@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2_프로미스</title>
+</head>
+<body>
+    <h3>2. 프로미스 실습</h3>
+
+    <script>
+    //  Promise 실습
+    const promise = new Promise((resolve, reject) => {
+        // Promise 제작코드(비동기 실행 로직)
+        const result = true;
+
+        if(result) {
+            resolve('Promise Success...'); 
+        }else {
+            reject('Promise Failed...');
+        }
+    });
+
+    // Promise 소비코드(비동기 처리)
+    promise
+        .then((result)=>{ // resolve() 호출 시 실행
+            console.log('then : ' + result);
+        })
+        .catch((result)=>{ // reject() 호출 시 실행
+            console.log('catch : ' + result);
+        })
+        .finally(()=>{
+            console.log('finally...');
+        });
+
+        // Promise 비동기 처리
+        function step1() {
+
+            return new Promise((resolve, reject)=>{
+
+                setTimeout(function(){
+
+                    resolve('step1...');
+
+                }, 1000);
+
+            });
+        }
+
+        function step2(message) {
+
+            console.log(message);
+
+            return new Promise((resolve, reject)=>{
+
+                setTimeout(function(){
+
+                    resolve('step2...');
+
+                }, 2000);
+
+            });
+        }
+
+        function step3(message) {
+
+            console.log(message);
+
+            return new Promise((resolve, reject)=>{
+
+                setTimeout(function(){
+
+                    resolve('step3...');
+
+                }, 3000);
+
+            });
+        }
+
+        step1()
+            .then((message)=>step2(message))
+            .then((message)=>step3(message))
+            .then((message)=>{
+                console.log('last : ' + message);
+            });
+
+        // async는 await 함수를 정의하는 키워드
+        async function job() { 
+        
+            const result1 = await step1(); // await는 step1의 작업 완료 대기 후 resolve 인자값 반환
+            const result2 = await step2(result1);
+            const result3 = await step3(result2);
+
+            console.log('job : ' + result3);
+        }
+
+        job(); // 비동기 함수 호출
+        
+    
+</script>
+
+</body>
+</html>

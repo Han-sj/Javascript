@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5_HTTP통신</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+
+            const user1 = document.getElementsByClassName('user1')[0];
+            
+            // User1 데이터 요청하기
+            fetch('http://localhost:8080/ch09/user1/list.do?mode=json')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+
+                    for(const user of data){
+
+                        const html = `<tr>
+                                            <td>${user.userid}</td>
+                                            <td>${user.name}</td>
+                                            <td>${user.hp}</td>
+                                            <td>${user.age}</td>
+                                            <td>
+                                                <a href='./modify.html?userid=${user.userid}'>수정</a>    
+                                                <a href='#' class='del' data-userid='${user.userid}'>삭제</a>    
+                                            </td>
+                                        </tr>`;
+                        
+                        user1.insertAdjacentHTML('beforeend', html);
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+
+            // -----------------------    
+            // 삭제 요청하기
+            // -----------------------
+            const dels = document.getElementsByClassName('del');
+
+            // 동적 이벤트 처리
+            document.addEventListener('click', async function(e){
+
+                if (e.target.classList.contains('del')) {
+                    e.preventDefault();
+                    
+                    const userid = e.target.dataset.userid; // 태그의 data-(사용자 정의 속성) 값 가져오기
+                    console.log(userid);
+
+                    const params = `mode=json&userid=${userid}`;
+
+                    const response = await fetch(`http://localhost:8080/ch09/user1/delete.do?${params}`);
+                    const data = await response.json();
+
+                    console.log(data);
+
+                    if (data != null) {
+                        alert(data.userid + '삭제 성공!');
+
+                        // 새로고침
+                        location.reload();
+                    }
+
+
+                }
+
+            });
+            
+
+        });
+
+
+    </script>
+</head>
+<body>
+    <h3>User1 AJAX 실습</h3>
+    
+    <a href="./list.html">목록</a>
+    <a href="./register.html">등록</a>
+    <table class="user1" border="1">
+        <tr>
+            <th>아이디</th>
+            <th>이름</th>
+            <th>휴대폰</th>
+            <th>나이</th>
+            <th>관리</th>
+        </tr>
+    </table>
+
+
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1_비동기처리</title>
+</head>
+<body>
+    <h3>1.비동기 처리 실습</h3>
+
+    <script>
+        // 비동기 실행 예시
+        console.log('1...');
+
+        setTimeout(function(){
+            console.log('2...');
+        }, 3000);
+
+        console.log('3...');
+
+        // 비동기 처리 예시
+        console.log('here...1');
+
+        function start(callback){
+
+            setTimeout(function(){
+
+                console.log('here...2');
+
+                // 콜백함수 호출
+                callback();
+            }, 3000);
+        }
+
+        function end(){
+            console.log('here...3');
+        }
+
+        start(end);
+
+        // 비동기처리를 위한 콜백 함수의 문제점 - 콜백 지옥
+        function step1(callback) {
+            setTimeout(function(){
+                console.log('step1...');
+                callback();
+            }, 1000);
+        }
+
+        function step2(callback) {
+            setTimeout(function(){
+                console.log('step2...');
+                callback();
+            }, 2000);
+
+        }function step3(callback) {
+            setTimeout(function(){
+                console.log('step3...');
+                callback();
+            }, 3000);
+        }
+
+        step1(function(){
+            step2(function(){
+                step3(function(){
+                    console.log('finish!!!');
+                });
+            });
+        });
+
+
+
+
+    </script>
+
+
+
+
+</body>
+</html>

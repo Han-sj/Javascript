@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User1 수정</title>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', async function(){           
+
+            // 전송 데이터 수신
+            const params = new URLSearchParams(location.search);
+            const userid = params.get('userid');
+
+            console.log(userid);
+
+            // 수정 데이터 요청
+            const response = await fetch('http://localhost:8080/ch09/user1/modify.do?mode=json&userid=' + userid);
+            const data = await response.json();
+
+            console.log(data);
+
+            
+            if(data != null){
+                // 수정 데이터 필드 출력하기
+                document.formUser.userid.value = data.userid;
+                document.formUser.name.value = data.name;
+                document.formUser.hp.value = data.hp;
+                document.formUser.age.value = data.age;
+            }
+
+            // 수정 데이터 전송하기
+
+            const btnSubmit = document.getElementById('submit');
+
+            btnSubmit.addEventListener('click', async function(e){
+                e.preventDefault();
+
+                // 폼 데이터 생성
+                const formData = new FormData(document.formUser); // form 태그 name 속성값으로 문서객체 가져오기
+                
+                // 서버 전송
+                const response = await fetch('http://localhost:8080/ch09/user1/modify.do', {
+                                            method: 'POST',                                            
+                                            body: formData
+                                        });
+
+                const data = await response.json();                                        
+                console.log(data);
+
+                if(data != null){
+                    alert(data.name + '님 수정 성공!!!');
+
+                    // 목록 이동
+                    location.href = './list.html';
+                }
+
+            });
+
+            
+        });
+    </script>
+
+</head>
+<body>
+    <h3>User1 수정</h3>
+
+    <a href="./list.html">목록</a>
+    <a href="./register.html">등록</a>
+
+    <form name="formUser">
+        <input type="hidden" name="mode" value="json">
+        <table border="1">
+            <tr>
+                <td>아이디</td>
+                <td><input type="text" name="userid" readonly></td>
+            </tr>
+            <tr>
+                <td>이름</td>
+                <td><input type="text" name="name"></td>
+            </tr>
+            <tr>
+                <td>휴대폰</td>
+                <td><input type="text" name="hp"></td>
+            </tr>
+            <tr>
+                <td>나이</td>
+                <td><input type="number" name="age"></td>
+            </tr>
+            <tr>					
+                <td colspan="2" align="right">
+                    <input type="submit" id="submit" value="수정하기">
+                </td>
+            </tr>			
+        </table>		
+    </form>
+
+
+</body>
+</html>

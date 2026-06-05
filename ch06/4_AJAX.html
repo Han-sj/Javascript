@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4_AJAX</title>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function(){
+
+            // user 요청하기
+            const btn1 = document.getElementById('btn1');
+            const user = document.getElementsByClassName('user')[0];
+            const spans = user.getElementsByTagName('span');
+
+            btn1.addEventListener('click', function(e){
+                //alert('click!');
+
+                fetch('./data/user.json')
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data); // JSON 객체
+                        spans[0].innerText = data.userid;
+                        spans[1].innerText = data.name;
+                        spans[2].innerText = data.age;
+                        spans[3].innerText = data.addr;                        
+                    })
+                    .catch(err => {
+                        console.log('err : ' + err);
+                    })
+                    .finally(()=>{
+                        console.log('통신 끝...');
+                    });
+            });
+
+            // persons 요청하기
+            const btn2 = document.querySelector('#btn2');
+            const table = document.querySelector('table');
+
+            btn2.addEventListener('click', async function(e){
+                //alert('click!');
+
+                // 통신하기
+                try {
+                    const response = await fetch('./data/persons.json');
+                    const data = await response.json();
+                    console.log(data);
+
+                    for(const person of data.persons){
+
+                        const tr = `<tr>
+                                        <td>${person.userid}</td>
+                                        <td>${person.name}</td>
+                                        <td>${person.birth}</td>
+                                        <td>${person.age}</td>
+                                    </tr>`;
+
+                        table.insertAdjacentHTML('beforeend', tr);
+                    }
+                }catch(err){
+                    console.log(err);
+                }
+            });
+
+        }); // DOMContentLoaded end
+
+
+        
+
+
+
+    </script>
+</head>
+<body>
+    <h3>4.AJAX 비동기 통신 실습</h3>
+
+    <button id="btn1">데이터 요청하기</button>
+    <p class="user">
+        아이디 : <span></span><br>
+        이름 : <span></span><br>
+        나이 : <span></span><br>
+        주소 : <span></span><br>
+    </p>
+    <hr/>
+
+    <button id="btn2">데이터 요청하기</button>
+    <table border="1">
+        <tr>
+            <th>아이디</th>
+            <th>이름</th>
+            <th>생년월일</th>
+            <th>나이</th>
+        </tr>
+
+    </table>
+
+</body>
+</html>
