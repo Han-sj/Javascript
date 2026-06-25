@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>user1::수정</title>
+		<script>
+			document.addEventListener('DOMContentLoaded', async function(){
+
+				// 전송 파라미터 수신
+				const params = new URLSearchParams(location.search);
+				const userid = params.get('userid');
+				console.log(userid);
+
+				// 수정 데이터 요청
+				const response = await fetch(`http://localhost:8080/ch08/user1/${userid}`);
+				const data = await response.json();
+				console.log(data);
+
+				// 수정 데이터 출력
+				const form = document.formUser;
+
+				form.userid.value = data.userid;
+				form.name.value = data.name;
+				form.hp.value = data.hp;
+				form.age.value = data.age;
+
+				// 수정 처리 요청하기
+				form.addEventListener('submit', async function(e){
+					e.preventDefault();
+
+					// JSON 생성					
+					const jsonData = {
+						"userid": this.userid.value,
+						"name": this.name.value,
+						"hp": this.hp.value,
+						"age": this.age.value
+					};
+
+					// 백엔드 요청
+					const response = await fetch('http://127.0.0.1:8080/ch08/user1', {
+						method: 'PUT',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify(jsonData)
+					});
+					const data = await response.json();
+					console.log(data);
+
+					if(data != null){
+						alert(data.name + '님을 수정했습니다.');
+						location.href = './list.html?modify=success';
+					}
+				});
+
+
+
+
+			});
+		</script>
+	</head>
+	<body>
+		<h3>User1 수정</h3>
+		<a href="/user1/list.html">목록</a>
+		
+		<form name="formUser" method="post">
+			<table border="1">
+				<tr>
+					<td>아이디</td>
+					<td><input type="text" name="userid" readonly></td>
+				</tr>
+				<tr>
+					<td>이름</td>
+					<td><input type="text" name="name"></td>
+				</tr>
+				<tr>
+					<td>휴대폰</td>
+					<td><input type="text" name="hp"></td>
+				</tr>
+				<tr>
+					<td>나이</td>
+					<td><input type="number" name="age"></td>
+				</tr>
+				<tr>					
+					<td colspan="2" align="right">
+						<input type="submit" value="수정하기">
+					</td>
+				</tr>			
+			</table>		
+		</form>		
+	</body>
+</html>

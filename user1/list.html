@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>user1::목록</title>
+
+		<script>
+			document.addEventListener('DOMContentLoaded', async function(){
+
+				// 목록 데이터 요청
+				const response = await fetch('http://localhost:8080/ch08/user1');
+				const data = await response.json();
+				console.log(data);
+
+				// 테이블 목록 출력
+				const table = document.getElementsByTagName('table')[0];
+
+				for(const user of data){
+
+					const tr = `<tr>
+									<td>${user.userid}</td>
+									<td>${user.name}</td>
+									<td>${user.hp}</td>
+									<td>${user.age}</td>
+									<td>
+										<a href="./modify.html?userid=${user.userid}">수정</a>
+										<a href="#" class='remove' data-userid=${user.userid}>삭제</a>
+									</td>
+								</tr>`;
+
+					table.insertAdjacentHTML('beforeend', tr);
+				} // for end
+
+				// 삭제 요청
+				document.addEventListener('click', async function(e){
+
+					// 삭제 링크 클릭
+					if(e.target.classList == 'remove'){
+						e.preventDefault();
+
+						if(!confirm('정말 삭제하시겠습니까?')){
+							return;
+						}
+
+						const userid = e.target.dataset.userid; // 사용자 정의 속성 userid 값 가져오기
+						console.log(userid);
+
+						// 삭제 백엔드 요청
+						const response = await fetch(`http://127.0.0.1:8080/ch08/user1/${userid}`, {
+							method: 'DELETE'
+						});
+						const data = await response.json();
+						console.log(data);
+
+						if(data.result){
+							// location.href = './list.htmml?remove=success'
+
+							// 동적 삭제
+							taget.closeset('tr').remove();
+
+						}
+
+
+					}
+
+				});
+
+			});
+		</script>
+	</head>
+	<body>
+		<h3>User1 목록</h3>
+		<a href="/user1/register.html">등록</a>
+		<table border="1">
+			<tr>
+				<th>아이디</th>
+				<th>이름</th>
+				<th>생년월일</th>
+				<th>나이</th>
+				<th>관리</th>
+			</tr>
+			
+		</table>	
+	</body>
+</html>
+
+
+
+
+
+
+
+
