@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>로그인</title>
+		<script>
+			document.addEventListener('DOMContentLoaded', function(){
+
+				const form = document.formLogin;
+
+				form.addEventListener('submit', async function(e){
+					e.preventDefault();
+
+					const jsonData = Object.fromEntries(new FormData(this));
+					console.log(jsonData);
+
+					const response = await fetch('http://127.0.0.1:8080/ch09/login', {
+						method: 'POST',
+						credentials: 'include', // 요청시 쿠키값 포함
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify(jsonData)
+					});
+					const data = await response.json();
+					console.log(data);
+
+					if(data){
+						alert(data.name + '님 로그인 성공!');
+						location.href = './info.html';
+					}
+				});				
+			});
+		</script>
+	</head>
+	<body>
+		<h3>로그인</h3>
+		
+		<a href="./register.html">회원가입</a>
+		
+		<form name="formLogin" method="post">
+			<table border="1">
+				<tr>
+					<td>아이디</td>
+					<td><input type="text" name="userid"></td>
+				</tr>
+				<tr>
+					<td>비밀번호</td>
+					<td><input type="password" name="pass"></td>
+				</tr>
+				<tr>					
+					<td colspan="2" align="right">
+						<input type="submit" value="로그인">
+					</td>
+				</tr>			
+			</table>		
+		</form>		
+	</body>
+</html>
